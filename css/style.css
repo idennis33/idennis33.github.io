@@ -6,13 +6,12 @@ header{
     text-align: center;
 }
 
-body{
-    background-color: black;
+.game-screen{
+	background-color: ghostwhite;
+	color: red;
 }
 
-.game-screen{
-    background-color: ghostwhite;
-}
+
 
 #modal {
 	background-color: rgba(0,0,0,0.4);
