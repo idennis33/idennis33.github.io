@@ -7,8 +7,9 @@ header{
 }
 
 .game-screen{
-	background-color: ghostwhite;
+	background-color: black;
 	color: red;
+	
 }
 button{
 	align-items: center;
