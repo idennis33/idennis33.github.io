@@ -1,20 +1,13 @@
-.main-container{
-    background-color: ghostwhite;
-}
+/* .main-container{
+    background-color: black;
+} */
+
 header{
-    color: goldenrod;
-    text-align: center;
+    color: royalblue;
+	text-align: center;
+	background-color: black;
 }
 
-.game-screen{
-	background-color: black;
-	color: red;
-	width: 100px;
-	height: 100px;
-}
-button{
-	align-items: center;
-}
 
 #modal {
 	background-color: rgba(0,0,0,0.4);
@@ -59,7 +52,4 @@ button{
 	cursor: pointer;
 }
 
-.questions{
-	background-color: yellow;
-	color: white;
-}
+

@@ -1,7 +1,7 @@
 // console.log("hello");
 // console.log($);
 
-let timer = 30;
+let timer = 150;
 const elem = document.getElementById("timer");
 
 const countDown = () => {
@@ -15,11 +15,13 @@ const countDown = () => {
 
 let timerId = setInterval(countDown, 1000);
 
-let points = 0;
-const scr = document.getElementById("scoreboard");
+let points = 0; 
+const scr = document.getElementById("scoreboard"); 
 const addPoints = () => {
-  let score = points++;
-};
+  let score =  points++
+}
+
+
 
 $(() => {
   //Grabbing Elements
@@ -36,88 +38,64 @@ $(() => {
   //Event Listeners
   $openBtn.on("click", openModal);
   $closeBtn.on("click", closeModal);
+
+  
 });
 
 const startTheGame = () => {
   userChoice = prompt("Are you ready to be questioned?");
-  if (userChoice === "yes" || userChoice === "Yes") {
-    alert("Let's see what you know!!");
-    question1();
-  } else if (userChoice === "no" || userChoice === "No") {
+  if (userChoice === "yes" || userChoice === "Yes" ) {
+    alert("Let's see what you know!!")
+  } else if (userChoice === "no" || userChoice === "No" ) {
     alert("That's okay you need more time to study.");
-    return;
+    endGame(); 
   }
 };
 
-const question1 = () => {
-  userChoice = window.prompt(
-    `What does Au stand for in the periodic table? a. sodium, b. mercury, c. gold, d.oxygen `
-  );
-  if (userChoice === "c" || userChoice === "C") {
-    alert("That is correct");
-    addPoints();
-    question2();
-  } else if (userChoice != "c" || userChoice != "C" || timer == -1) {
-    alert("That is incorrect");
-    question2();
+class Question{
+  constructor(question, answer,countDown){
+    this.question = question
+    this.answer= answer
   }
-};
-
-const question2 = () => {
-  userChoice = window.prompt(
-    "Which popular video game franchise has released games with the subtitled Modern Warfare and Black Ops? a. Call of Duty, b. Rainbow Six, c. Battlefield, d. Super Mario Bros"
-  );
-  if (userChoice === "a" || userChoice === "A") {
-    alert("That is correct");
-    addPoints();
-    question3();
-  } else if (userChoice != "a" || userChoice != "A" || timer == -1) {
-    alert("That is incorrect");
-    question3();
+}
+const q1 = new Question(
+  'What does Au stand for in the periodic table? /n 1-sodium /n 2-mercury /n 3-gold /n 4-oxygen',
+  '3'
+)
+const q2 = new Question(
+  'Which popular video game franchise has released games with the subtitled Modern Warfare and Black Ops? /n 1-Call of Duty /n 2-Rainbow Six /n  3-Battlefield /n 4-Super Mario Bros',
+  '1'
+)
+const q3 = new Question(
+  'What is rapper P Diddy’s real name? /n 1-Chris Brown /n 2-Sean Adams /n 3-Micheal Jones /n 4-Sean Combs',
+  '4'
+)
+const q4 = new Question(
+  'In which year was the Nintendo 64 released in Europe? /n 1-1995 /n 2-1996 /n 3-1997 /n 4-2000',
+  '3'
+)
+const q5 = new Question(
+  'Which European city hosted the 1936 Summer Olympics? /n 1-Berlin /n 2-Greece /n 3-Rome /n 4-Paris',
+  '1'
+)
+const questions = [q1, q2, q3,q4,q5]
+currentQuestion = undefined
+// DOM targets
+const question = $('#question')
+$('#submit').on('click', (e)=>{
+  const answer = $('#answer').val()
+  console.log(answer)
+  if(answer===currentQuestion.answer){
+      $('#messsage').text('Correct answer!')
+  } else {
+      $('#messsage').text(`Wrong! the correct answer was ${currentQuestion.answer}`)
   }
-};
-
-const question3 = () => {
-  userChoice = window.prompt(
-    "What is rapper P Diddy’s real name? a. Chris Brown, b. Sean Adams, c. Micheal Jones, d. Sean Combs"
-  );
-  if (userChoice === "d" || userChoice === "D") {
-    alert("That is correct");
-    addPoints();
-    question4();
-  } else if (userChoice != "d" || userChoice != "D" || timer == -1) {
-    alert("That is incorrect");
-    question4();
-  }
-};
-
-const question4 = () => {
-  userChoice = window.prompt(
-    "Which European city hosted the 1936 Summer Olympics? a. Greece, b. Berlin, c. Rome, d. Paris"
-  );
-  if (userChoice === "B" || userChoice === "B") {
-    alert("That is correct");
-    addPoints();
-    question5();
-  } else if (userChoice != "b" || userChoice != "B" || timer == -1) {
-    alert("That is incorrect");
-    question5();
-  }
-};
-
-const question5 = () => {
-  userChoice = window.prompt(
-    "In which year was the Nintendo 64 released in Europe? a.1995, b.1996, c.2000, d.1997"
-  );
-  if (userChoice === "d" || userChoice === "D") {
-    alert("That is correct");
-    addPoints();
-    endGame();
-  } else if (userChoice != "d" || userChoice != "D" || timer == -1) {
-    alert("That is incorrect");
-    endGame();
-  }
-};
+})
+$('#new-question').on('click', (e)=>{
+  const idx = Math.floor(Math.random()*questions.length)
+  currentQuestion = questions[idx]
+  question.html(`Question: ${currentQuestion.question}`)
+})
 
 const endGame = () => {
   alert("Lets see your final score.");
@@ -130,20 +108,5 @@ const endGame = () => {
     return;
   }
 };
-
-const quest = () => {
-  let ids = (arrayOfFunctions = [
-    startTheGame(),
-    question1(),
-    question2(),
-    question3(),
-    question4(),
-    question5(),
-  ]);
-  for (let i = 0; i < quest.length; i++) {
-    document.write(quest[i]);
-  }
-};
-document.getElementById("questions").innerHTML = quest();
 
 startTheGame();
