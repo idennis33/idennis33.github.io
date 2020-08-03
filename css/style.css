@@ -9,7 +9,8 @@ header{
 .game-screen{
 	background-color: black;
 	color: red;
-	
+	width: 100px;
+	height: 100px;
 }
 button{
 	align-items: center;
@@ -56,4 +57,9 @@ button{
 	color: white;
 	font-family: 'Arial';
 	cursor: pointer;
+}
+
+.questions{
+	background-color: yellow;
+	color: white;
 }

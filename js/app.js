@@ -15,13 +15,11 @@ const countDown = () => {
 
 let timerId = setInterval(countDown, 1000);
 
-let points = 0; 
-const scr = document.getElementById("scoreboard"); 
+let points = 0;
+const scr = document.getElementById("scoreboard");
 const addPoints = () => {
-  let score =  points++
-}
-
-
+  let score = points++;
+};
 
 $(() => {
   //Grabbing Elements
@@ -42,20 +40,22 @@ $(() => {
 
 const startTheGame = () => {
   userChoice = prompt("Are you ready to be questioned?");
-  if (userChoice === "yes" || userChoice === "Yes" ) {
-    alert("Let's see what you know!!")
+  if (userChoice === "yes" || userChoice === "Yes") {
+    alert("Let's see what you know!!");
     question1();
-  } else if (userChoice === "no" || userChoice === "No" ) {
+  } else if (userChoice === "no" || userChoice === "No") {
     alert("That's okay you need more time to study.");
-    return; 
+    return;
   }
 };
 
 const question1 = () => {
-  userChoice = window.prompt(`What does Au stand for in the periodic table? a. sodium, b. mercury, c. gold, d.oxygen `);
+  userChoice = window.prompt(
+    `What does Au stand for in the periodic table? a. sodium, b. mercury, c. gold, d.oxygen `
+  );
   if (userChoice === "c" || userChoice === "C") {
     alert("That is correct");
-    addPoints(); 
+    addPoints();
     question2();
   } else if (userChoice != "c" || userChoice != "C" || timer == -1) {
     alert("That is incorrect");
@@ -64,10 +64,12 @@ const question1 = () => {
 };
 
 const question2 = () => {
-  userChoice = window.prompt("Which popular video game franchise has released games with the subtitled Modern Warfare and Black Ops? a. Call of Duty, b. Rainbow Six, c. Battlefield, d. Super Mario Bros");
+  userChoice = window.prompt(
+    "Which popular video game franchise has released games with the subtitled Modern Warfare and Black Ops? a. Call of Duty, b. Rainbow Six, c. Battlefield, d. Super Mario Bros"
+  );
   if (userChoice === "a" || userChoice === "A") {
     alert("That is correct");
-    addPoints(); 
+    addPoints();
     question3();
   } else if (userChoice != "a" || userChoice != "A" || timer == -1) {
     alert("That is incorrect");
@@ -81,7 +83,7 @@ const question3 = () => {
   );
   if (userChoice === "d" || userChoice === "D") {
     alert("That is correct");
-    addPoints(); 
+    addPoints();
     question4();
   } else if (userChoice != "d" || userChoice != "D" || timer == -1) {
     alert("That is incorrect");
@@ -95,9 +97,9 @@ const question4 = () => {
   );
   if (userChoice === "B" || userChoice === "B") {
     alert("That is correct");
-    addPoints(); 
+    addPoints();
     question5();
-  } else if (userChoice != "b" || userChoice != "B"|| timer == -1) {
+  } else if (userChoice != "b" || userChoice != "B" || timer == -1) {
     alert("That is incorrect");
     question5();
   }
@@ -109,8 +111,8 @@ const question5 = () => {
   );
   if (userChoice === "d" || userChoice === "D") {
     alert("That is correct");
-    addPoints(); 
-    endGame(); 
+    addPoints();
+    endGame();
   } else if (userChoice != "d" || userChoice != "D" || timer == -1) {
     alert("That is incorrect");
     endGame();
@@ -129,19 +131,19 @@ const endGame = () => {
   }
 };
 
-const quest = () =>{
-  let ids = arrayOfFunctions = [
+const quest = () => {
+  let ids = (arrayOfFunctions = [
     startTheGame(),
     question1(),
     question2(),
     question3(),
     question4(),
-    question5()
-  ]; 
-  for (let i = 0; i < quest.length; i++){
-    document.write(quest[i]); 
+    question5(),
+  ]);
+  for (let i = 0; i < quest.length; i++) {
+    document.write(quest[i]);
   }
-}
-document.getElementById('questions').innerHTML =quest(); 
+};
+document.getElementById("questions").innerHTML = quest();
 
 startTheGame();
