@@ -22,6 +22,7 @@ const addPoints = () => {
 }
 
 
+
 $(() => {
   //Grabbing Elements
   const $openBtn = $("#openModal");
@@ -42,9 +43,11 @@ $(() => {
 const startTheGame = () => {
   userChoice = prompt("Are you ready to be questioned?");
   if (userChoice === "yes" || userChoice === "Yes" ) {
+    alert("Let's see what you know!!")
     question1();
   } else if (userChoice === "no" || userChoice === "No" ) {
     alert("That's okay you need more time to study.");
+    return; 
   }
 };
 
@@ -122,6 +125,23 @@ const endGame = () => {
     startTheGame();
   } else if (userChoice === "no" || userChoice === "No") {
     alert("Well better luck next time.");
+    return;
   }
 };
+
+const quest = () =>{
+  let ids = arrayOfFunctions = [
+    startTheGame(),
+    question1(),
+    question2(),
+    question3(),
+    question4(),
+    question5()
+  ]; 
+  for (let i = 0; i < quest.length; i++){
+    document.write(quest[i]); 
+  }
+}
+document.getElementById('questions').innerHTML =quest(); 
+
 startTheGame();
