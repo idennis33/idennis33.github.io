@@ -1,20 +1,26 @@
 body{
 	background-color: black;
+	background-image: url(https://i.imgur.com/rtR7vl1.jpg);
+	background-size: cover;
+
+	
 }
 
 .game-screen{
 	background-color: black;
 	text-align: center;
-
+	height: 100px;
+	margin: 0 auto;
 }
 #timer{
 	color:red;
 }
 #question{
-	color: red;
+	color:ghostwhite;
 }
 
 header{
+	font-family: 'Bungee Shade', cursive;
     color: royalblue;
 	text-align: center;
 	background-color: black;

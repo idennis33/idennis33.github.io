@@ -1,12 +1,13 @@
 // console.log("hello");
 // console.log($);
 
-let timer = 150;
+let timer = 60;
 const elem = document.getElementById("timer");
 
 const countDown = () => {
   if (timer == -1) {
     clearTimeout(timerId);
+    endGame(); 
   } else {
     $("#timer").text(`${timer} seconds remaining`);
     timer--;
@@ -42,6 +43,7 @@ const startTheGame = () => {
   userChoice = prompt("Are you ready to be questioned?");
   if (userChoice === "yes" || userChoice === "Yes") {
     alert("Let's see what you know!!");
+    // countDown(); 
   } else if (userChoice === "no" || userChoice === "No") {
     alert("That's okay you need more time to study.");
     endGame();
@@ -74,9 +76,10 @@ const q5 = new Question(
   "Which European city hosted the 1936 Summer Olympics?  1-Berlin  2-Greece 3-Rome  4-Paris",
   "1"
 );
+
 const questions = [q1, q2, q3, q4, q5];
 let currentQuestion = undefined;
-const highestIndex = questions.length - 1;
+const highestIndex = questions.length-1;
 let currentQuestionIndex = 0; 
 // DOM targets
 const question = $("#question");
@@ -92,13 +95,23 @@ $("#submit").on("click", (e) => {
 });
 $("#new-question").on("click", (e) => {
     currentQuestion = questions[currentQuestionIndex];
-    question.html(`Question ${currentQuestion.question}`);
-    if (currentQuestionIndex < highestIndex) {
+    question.html(`Question:  ${currentQuestion.question}`);
+    if (currentQuestionIndex <= highestIndex) {
       // if it's NOT the highest index, incriment the currentImgIndex by 1
       currentQuestionIndex++;
     }else {
       endGame(); 
     }
+    const countDown = () => {
+  if (timer == -1) {
+    clearTimeout(timerId);
+    endGame(); 
+  } else {
+    $("#timer").text(`${timer} seconds remaining`);
+    timer--;
+  }
+};
+
 });
 
 const endGame = () => {
@@ -106,9 +119,12 @@ const endGame = () => {
   alert(`You got ${points} out of 5`);
   userChoice = window.prompt("Do you want to retry the questions.");
   if (userChoice === "yes" || userChoice === "Yes") {
-    startTheGame();
+    window.location.reload();
   } else if (userChoice === "no" || userChoice === "No") {
     alert("Well better luck next time.");
+    $('#message').empty();
+    $('#message').text('GAME OVER').appendTo('.game-screen')
+    $('#timer').detach(); 
     return;
   }
 };
