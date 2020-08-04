@@ -1,13 +1,27 @@
-/* .main-container{
-    background-color: black;
-} */
+body{
+	background-color: black;
+}
+
+.game-screen{
+	background-color: black;
+	text-align: center;
+
+}
+#timer{
+	color:red;
+}
+#question{
+	color: red;
+}
 
 header{
     color: royalblue;
 	text-align: center;
 	background-color: black;
 }
-
+#message{
+	color: red; 
+}
 
 #modal {
 	background-color: rgba(0,0,0,0.4);
