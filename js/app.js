@@ -1,20 +1,20 @@
 // console.log("hello");
 // console.log($);
 
-let timer = 60;
+let timer = 75;
 const elem = document.getElementById("timer");
 
-const countDown = () => {
-  if (timer == -1) {
-    clearTimeout(timerId);
-    endGame(); 
-  } else {
-    $("#timer").text(`${timer} seconds remaining`);
-    timer--;
-  }
-};
+// const countDown = () => {
+//   if (timer == -1) {
+//     clearTimeout(timerId);
+//     endGame();
+//   } else {
+//     $("#timer").text(`${timer} seconds remaining`);
+//     timer--;
+//   }
+// };
 
-let timerId = setInterval(countDown, 1000);
+// let timerId = setInterval(countDown, 1000);
 
 let points = 0;
 const scr = document.getElementById("scoreboard");
@@ -43,7 +43,10 @@ const startTheGame = () => {
   userChoice = prompt("Are you ready to be questioned?");
   if (userChoice === "yes" || userChoice === "Yes") {
     alert("Let's see what you know!!");
-    // countDown(); 
+    currentQuestion = questions[currentQuestionIndex]; 
+  $('#question').html(`Question:  ${currentQuestion.question}`);
+    currentQuestionIndex++; 
+    countDown();
   } else if (userChoice === "no" || userChoice === "No") {
     alert("That's okay you need more time to study.");
     endGame();
@@ -79,8 +82,8 @@ const q5 = new Question(
 
 const questions = [q1, q2, q3, q4, q5];
 let currentQuestion = undefined;
-const highestIndex = questions.length-1;
-let currentQuestionIndex = 0; 
+let highestIndex = questions.length ;
+let currentQuestionIndex = 0;
 // DOM targets
 const question = $("#question");
 $("#submit").on("click", (e) => {
@@ -89,29 +92,38 @@ $("#submit").on("click", (e) => {
   if (answer === currentQuestion.answer) {
     $("#message").text("Correct answer!");
     addPoints();
-  } else if (answer !== currentQuestion.answer) { 
-    $("#message").text(`Wrong! the correct answer was  ${currentQuestion.answer}`);
+  } else if (answer !== currentQuestion.answer) {
+    $("#message").text(
+      `Wrong! the correct answer was  ${currentQuestion.answer}`
+    );
   }
 });
 $("#new-question").on("click", (e) => {
-    currentQuestion = questions[currentQuestionIndex];
-    question.html(`Question:  ${currentQuestion.question}`);
-    if (currentQuestionIndex <= highestIndex) {
-      // if it's NOT the highest index, incriment the currentImgIndex by 1
-      currentQuestionIndex++;
-    }else {
+  $("#question").empty();
+  console.log(currentQuestion)
+  currentQuestion = questions[currentQuestionIndex]; 
+  $('#question').html(`Question:  ${currentQuestion.question}`);
+  console.log(highestIndex)
+  console.log(currentQuestionIndex)
+  if (currentQuestionIndex < highestIndex) {
+    console.log(highestIndex)
+    console.log(currentQuestionIndex)
+    currentQuestionIndex++;
+    }else if(currentQuestionIndex === highestIndex){
       endGame(); 
-    }
-    const countDown = () => {
-  if (timer == -1) {
-    clearTimeout(timerId);
-    endGame(); 
-  } else {
-    $("#timer").text(`${timer} seconds remaining`);
-    timer--;
-  }
-};
-
+    // if it's NOT the highest index, incriment the currentImgIndex by 1
+    
+  } 
+  
+  // const countDown = () => {
+  //   if (timer == -1) {
+  //     clearTimeout(timerId);
+  //     endGame();
+  //   } else {
+  //     $("#timer").text(`${timer} seconds remaining`);
+  //     timer--;
+  //   }
+  // };
 });
 
 const endGame = () => {
@@ -122,11 +134,13 @@ const endGame = () => {
     window.location.reload();
   } else if (userChoice === "no" || userChoice === "No") {
     alert("Well better luck next time.");
-    $('#message').empty();
-    $('#message').text('GAME OVER').appendTo('.game-screen')
-    $('#timer').detach(); 
+    $("#message").empty();
+    $("#message").text("GAME OVER").appendTo(".game-screen");
+    $("#timer").detach();
     return;
   }
 };
 
-startTheGame();
+$("#startGame").on("click", (e) => {
+  startTheGame();
+});
